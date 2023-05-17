@@ -42,6 +42,53 @@ NOMBRE_CARGO_CHOICES = [
     ("técnico-pedagógica", "Técnico-pedagógica"),
     ("UTP comunal", "UTP comunal"),
 ]
+CARGOS_ASISTENTES_CHOICES = [
+    ('AUXILIAR DE SERVICIOS MENORES', 'Auxiliar de Servicios Menores'),
+    ('AUXILIAR DE ASEO', 'Auxiliar de Aseo'),
+    ('FONOAUDIÓLOGO/A', 'Fonoaudiólogo/a'),
+    ('INSPECTOR/A', 'Inspector/a'),
+    ('SECRETARIO/A', 'Secretario/a'),
+    ('PSICÓLOGO/A', 'Psicólogo/a'),
+    ('MONITOR/A TALLER', 'Monitor/a Taller'),
+    ('OTRA', 'Otra'),
+    ('BIBLIOTECARISA (REEMPLAZO)', 'Bibliotecarisa (Reemplazo)'),
+    ('AUXILIAR SRVICIOS MENORES', 'Auxiliar Srvicios Menores'),
+    ('DOCENTE TP', 'Docente TP'),
+    ('ASISTENTE SOCIAL', 'Asistente Social'),
+    ('INSPECTORA', 'Inspectora'),
+    ('BIBLIOTECARIO/A ENCARGADO/A CRA', 'Bibliotecario/a Encargado/a CRA'),
+    ('MONITOR DE DEPORTES', 'Monitor de Deportes'),
+    ('ASISTENTE/TÉCNICO PÁRVULOS', 'Asistente/Técnico Párvulos'),
+    ('ASISTENTE DE AULA', 'Asistente de Aula'),
+    ('SIN DATO / AGREGAR', 'Sin Dato / Agregar'),
+    ('PSICOPEDAGOGO/A', 'Psicopedagogo/a'),
+    ('CUIDADO DEL ESTABLECIMIENTO', 'Cuidado del Establecimiento'),
+    ('APOYO PIE', 'Apoyo PIE'),
+    ('FONOAUDIOLOGA', 'Fonoaudióloga'),
+    ('SOPORTE INFORMÁTICO', 'Soporte Informático'),
+    ('PSICOLOGA PROGRAMA INTEGRACIÓN ESCOLAR', 'Psicóloga Programa Integración Escolar'),
+    ('EDUCADOR(A) TRADICIONAL', 'Educador(a) Tradicional'),
+    ('MONITOR', 'Monitor'),
+    ('ENCARGADO/A DE MANTENCIÓN', 'Encargado/a de Mantención'),
+    ('AUXILIAR SERVICIOS MENORES', 'Auxiliar Servicios Menores'),
+    ('PSICOLOGO REEMPLAZO', 'Psicólogo Reemplazo'),
+    ('APOYO TECNICO UTP', 'Apoyo Técnico UTP'),
+    ('TECNICO JUNJI', 'Técnico JUNJI'),
+    ('APOYO ADMINISTRATIVO UNIDAD PERSONAL', 'Apoyo Administrativo Unidad Personal'),
+    ('COORDINADOR TECNICO INTERCULTURAL DE LOS ESTABLECIMIENTOS EDUCACIONLES DE LA COMUNA', 'Coordinador Técnico Intercultural de los Establecimientos Educacionales de la Comuna'),
+    ('JEFE UAGR (s)', 'Jefe UAGR (s)'),
+    ('ASISTENTE DE PARVULOS', 'Asistente de Párvulos'),
+    ('ASISTENTE DIFERENCIAL', 'Asistente Diferencial'),
+    ('ENCARGADO DE PROYECTO', 'Encargado de Proyecto'),
+    ('APOYO ADMINISTRATIVO', 'Apoyo Administrativo'),
+    ('APOYO DE SERVICIOS MENORES E HIGIENIZACION ESPACION ,DAEM.', 'Apoyo de Servicios Menores e Higienización Espación ,DAEM.'),
+    ('AYUDANTE DE AULA', 'Ayudante de Aula'),
+    ('PROFESIONAL APOYO ALUMNOS PRIORITARIOS SEP', 'Profesional Apoyo Alumnos Prioritarios SEP'),
+    ('TERAPIA OCUPACIONAL', 'Terapia Ocupacional'),
+    ('APOYO UNIDAD EXTRAESCOLAR COMUNAL', 'Apoyo Unidad Extraescolar Comunal'),
+    ('FONOAUDIOLOGA (REEMPLAZANTE)', 'Fonoaudióloga (Reemplazante)'),
+    ('MONITORA BAILE', 'Monitora Baile'),
+]
 
 CALIDAD_NOMBRAMIENTO_CHOICES = [
     ("titular", "Titular"),
@@ -62,4 +109,8 @@ TRAMO_CPEIP_CHOICES = [
     ("experto 2", "Experto 2"),
 ]
 
-TIPO_CONTRATO_CHOICES = []
+TIPO_CONTRATO_CHOICES = [
+    ("TI", "Titular"),
+    ("AC", "A Contrata"),
+    ("AM", "Ambas"),
+]

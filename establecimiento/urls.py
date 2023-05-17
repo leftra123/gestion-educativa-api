@@ -5,12 +5,14 @@ from establecimiento import views
 
 router = routers.DefaultRouter()
 router.register(r"establecimiento", views.EstablecimientoView, "establecimiento")
-router.register(r"rol", views.RolView, "rol")
 router.register(r"persona", views.PersonaView, "persona")
-router.register(r"asignacion", views.AsignacionView, "asignacion")
+router.register(r"docente", views.DocenteView, "docente")
+router.register(
+    r"asistente_educacion", views.AsistenteEducacionView, "asistente_educacion"
+)
 
 
 urlpatterns = [
     path("api/", include(router.urls)),
-    path('docs/', include_docs_urls(title='Gestión Educativa API')),
+    path("docs/", include_docs_urls(title="Gestión Educativa API")),
 ]

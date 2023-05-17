@@ -1,39 +1,52 @@
 from django.db import models
-
-class Rol(models.Model):
-    nombre = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.nombre
-
-
-class Establecimiento(models.Model):
-    nombre = models.CharField(max_length=255)
-    rbd = models.CharField(max_length=4, unique=True)
-    encargado = models.OneToOneField('Asignacion', on_delete=models.SET_NULL, null=True, blank=True, related_name='establecimiento_encargado')
-
-    def save(self, *args, **kwargs):
-        if self.encargado is not None and self.encargado.rol.nombre != 'docente de aula':
-            raise ValueError('El encargado debe tener el rol de docente de aula')
-        super().save(*args, **kwargs)    
-
-    def __str__(self):
-        return self.nombre
+from .choices import *
 
 
 class Persona(models.Model):
-    nombre = models.CharField(max_length=255)
+    nombre = models.CharField(max_length=100)
+    apellido_paterno = models.CharField(max_length=100)
+    apellido_materno = models.CharField(max_length=100)
+    rut = models.CharField(max_length=12, unique=True)
     fecha_nacimiento = models.DateField()
-    correo_electronico = models.EmailField(unique=True)
+    direccion = models.CharField(max_length=200)
+    telefono = models.CharField(max_length=20)
+    correo = models.EmailField(unique=True)
 
-    def __str__(self):
-        return self.nombre
+
+class Establecimiento(models.Model):
+    rbd = models.IntegerField(unique=True)
+    dv = models.CharField(max_length=1)
+    nombre = models.CharField(max_length=100)
+    encargado = models.ForeignKey(Persona, on_delete=models.SET_NULL, null=True)
 
 
-class Asignacion(models.Model):
+class Subvencion(models.Model):
+    tipo = models.CharField(max_length=100, choices=TIPO_SUBVENCION_CHOICES)
+
+
+class Contrato(models.Model):
+    tipo = models.CharField(max_length=100, choices=TIPO_CONTRATO_CHOICES)
+
+
+class Docente(models.Model):
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE)
-    establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE)
-    rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
+    rol = models.CharField(max_length=100, choices=NOMBRE_CARGO_CHOICES)
+    subvencion = models.ForeignKey(Subvencion, on_delete=models.SET_NULL, null=True)
+    contrato = models.ForeignKey(Contrato, on_delete=models.SET_NULL, null=True)
+    fecha_inicio = models.DateField()
+    reemplazando = models.ForeignKey(
+        "self", on_delete=models.SET_NULL, null=True, blank=True
+    )
+    jubilado = models.BooleanField()
+    bienios_cumplidos = models.IntegerField()
+    renuncia_presentada = models.BooleanField()
+    fecha_salida = models.DateField(null=True, blank=True)
+    establecimientos = models.ManyToManyField(Establecimiento, related_name="docentes")
 
-    def __str__(self):
-        return f"{self.persona.nombre} - {self.rol.nombre} en {self.establecimiento.nombre}"
+
+class AsistenteEducacion(models.Model):
+    persona = models.ForeignKey(Persona, on_delete=models.CASCADE)
+    rol = models.CharField(max_length=100, choices=CARGOS_ASISTENTES_CHOICES)
+    establecimientos = models.ManyToManyField(
+        Establecimiento, related_name="asistentes"
+    )
