@@ -21,6 +21,8 @@ class PersonaSerializer(serializers.ModelSerializer):
 
 
 class EstablecimientoSerializer(serializers.ModelSerializer):
+    encargado = PersonaSerializer() 
     class Meta:
         model = Establecimiento
-        fields = "__all__"
+        fields = ['id', 'rbd', 'dv', 'nombre', 'encargado']
+

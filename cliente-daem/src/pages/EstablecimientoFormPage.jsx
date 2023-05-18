@@ -29,14 +29,18 @@ export function EstablecimientoFormPage() {
     useEffect(() => {
         async function loadEstablecimiento() {
             if (params.id) {
-                const { data: { nombre, rbd, encargado } } = await getEstablecimiento(params.id)
+                const { data: { nombre, rbd, encargado, dv } } = await getEstablecimiento(params.id)
                 setValue('nombre', nombre)
                 setValue('rbd', rbd)
-                setValue('encargado', encargado)
+                setValue('dv', dv)
+                setValue('encargado.nombre', encargado.nombre)
+                setValue('encargado.apellido_paterno', encargado.apellido_paterno)
+                setValue('encargado.apellido_materno', encargado.apellido_materno)
             }
         }
         loadEstablecimiento()
     }, [])
+    
 
     return (
         <div className="max-w-md mx-auto mt-2">
@@ -55,7 +59,7 @@ export function EstablecimientoFormPage() {
             <input
                 type="text"
                 placeholder="RBD"
-                {...register("rbd", { required: "Este campo es requerido", maxLength: { value: 4, message: "Máximo 4 números" } })}
+                {...register("rbd", { required: "Este campo es requerido", maxLength: { value: 4, message: "Máximo 5 números" } })}
                 className="w-full px-3 py-2 border border-gray-300 rounded"
             />
             {errors.rbd && <span className="text-red-500">{errors.rbd.message}</span>}
@@ -63,11 +67,37 @@ export function EstablecimientoFormPage() {
         <div>
             <input
                 type="text"
-                placeholder="Encargado"
-                {...register("encargado")}
+                placeholder="DV"
+                {...register("dv", { required: "Este campo es requerido", maxLength: { value: 1, message: "Máximo 1 Caracter" } })}
                 className="w-full px-3 py-2 border border-gray-300 rounded"
             />
+            {errors.rbd && <span className="text-red-500">{errors.dv.message}</span>}
         </div>
+        <div>
+    <input
+        type="text"
+        placeholder="Nombre del Encargado"
+        {...register("encargado.nombre")}
+        className="w-full px-3 py-2 border border-gray-300 rounded"
+    />
+</div>
+<div>
+    <input
+        type="text"
+        placeholder="Apellido Paterno del Encargado"
+        {...register("encargado.apellido_paterno")}
+        className="w-full px-3 py-2 border border-gray-300 rounded"
+    />
+</div>
+<div>
+    <input
+        type="text"
+        placeholder="Apellido Materno del Encargado"
+        {...register("encargado.apellido_materno")}
+        className="w-full px-3 py-2 border border-gray-300 rounded"
+    />
+</div>
+
         <button type="submit" className="px-5 py-2 bg-blue-500 text-white rounded transition duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105">Guardar</button>
         {params.id && 
             <button 
