@@ -105,11 +105,11 @@ CARGOS_ASISTENTES_CHOICES = [
 
 
 CALIDAD_NOMBRAMIENTO_CHOICES = [
-    ("titular", "Titular"),
-    ("contrata", "Contrata"),
-    ("reemplazo", "Reemplazo"),
-    ("jubilado", "Jubilado"),
     ("cese", "Cese"),
+    ("contrata", "Contrata"),
+    ("titular", "Titular"),
+    ("jubilado", "Jubilado"),
+    ("reemplazo", "Reemplazo"),
     ("renuncia", "Renuncia"),
     ("termino contrato", "Término contrato"),
 ]
@@ -127,3 +127,13 @@ TIPO_CONTRATO_CHOICES = [
     ("TITULAR", "Titular"),
     ("A CONTRATA", "A Contrata"),
 ]
+
+CALIDAD_NOMBRAMIENTO_CHOICES = (
+    ('titular', 'Titular'),
+    ('contrata', 'Contrata'),
+    ('reemplazo', 'Reemplazo'),
+    ('jubilado', 'Jubilado'),
+    ('cese', 'Cese'),
+    ('renuncia', 'Renuncia'),
+    ('termino_contrato', 'Termino Contrato'),
+)
