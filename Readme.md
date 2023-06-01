@@ -3,10 +3,11 @@
 ![GitHub](https://img.shields.io/badge/license-MIT-blue.svg) 
 
 Este proyecto es un sistema de gestión educativa API utilizando Django en el servidor y React en el cliente. La API se encarga de gestionar los valores de establecimientos, docentes, asistentes y DAEM. La interfaz del cliente se ha desarrollado en React con un diseño atractivo mediante TailwindCSS.
-
-![Django Logo](https://icon-library.com/images/django-icon/django-icon-0.jpg)
-![React Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png)
-![Tailwind CSS Logo](https://symbols.getvecta.com/stencil_97/3_tailwind-css-icon.43c02f69a6.svg)
+<p float="left">
+  <img src="https://icon-library.com/images/django-icon/django-icon-0.jpg" width="100" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" width="100" /> 
+  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" width="100" />
+</p>
 
 ## Características
 
@@ -26,7 +27,7 @@ Este proyecto es un sistema de gestión educativa API utilizando Django en el se
 1. Clone este repositorio:
 
 \```bash
-git clone https://github.com/usuario/gestion-educativa-api.git
+git clone https://github.com/leftra123/gestion-educativa-api.git
 \```
 
 2. Instalar dependencias:
@@ -49,6 +50,7 @@ Asegúrese de tener instalado Node.js y npm. Luego en la carpeta del cliente, ej
 npm install
 \```
 
+
 ## Uso
 
 **Para el servidor (Django)**:
@@ -57,7 +59,9 @@ Desde la raíz del proyecto, ejecutar:
 
 \```bash
 python manage.py runserver
+\```
 # o en Mac
+\```bash
 python3 manage.py runserver
 \```
 
@@ -74,3 +78,7 @@ npm run dev
 ## Contacto
 
 Si tienes alguna duda o sugerencia puedes contactarme, [presiona aquí.](https://github.com/leftra123/).
+
+
+## Reconocimientos
+Este README fue creado con la ayuda de [OpenAI's ChatGPT]().
