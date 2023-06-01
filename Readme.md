@@ -41,9 +41,9 @@ Este proyecto es un sistema de gestión educativa API utilizando Django en el se
 
 1. Clone este repositorio:
 
-\```bash
+```
 git clone https://github.com/leftra123/gestion-educativa-api.git
-\```
+```
 
 2. Instalar dependencias:
 
