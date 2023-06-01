@@ -75,7 +75,7 @@ Desde la raíz del proyecto, ejecutar:
 ```
 python manage.py runserver
 ```
-# o en Mac
+## o en Mac
 ```bash
 python3 manage.py runserver
 ```
