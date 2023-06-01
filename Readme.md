@@ -1,13 +1,28 @@
+<div align="center">
+
 # Gestion-Educativa-API
 
-![GitHub](https://img.shields.io/badge/license-MIT-blue.svg) 
+<p float="left">
+  <img src="https://seekicon.com/free-icon-download/github-badge_1.svg" width="20" />
+</p> 
 
 Este proyecto es un sistema de gestión educativa API utilizando Django en el servidor y React en el cliente. La API se encarga de gestionar los valores de establecimientos, docentes, asistentes y DAEM. La interfaz del cliente se ha desarrollado en React con un diseño atractivo mediante TailwindCSS.
-<p float="left">
+
+<p>
   <img src="https://icon-library.com/images/django-icon/django-icon-0.jpg" width="100" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" width="100" /> 
   <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" width="100" />
 </p>
+
+</div>
+
+## Contenidos
+- [Características](#características)
+- [Tecnologías](#tecnologías)
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Contacto](#contacto)
+- [Reconocimientos](#reconocimientos)
 
 ## Características
 
@@ -81,4 +96,4 @@ Si tienes alguna duda o sugerencia puedes contactarme, [presiona aquí.](https:/
 
 
 ## Reconocimientos
-Este README fue creado con la ayuda de [OpenAI's ChatGPT]().
+Este README fue creado con la ayuda de [OpenAI's ChatGPT](https://chat.openai.com/).
