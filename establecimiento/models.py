@@ -3,11 +3,11 @@ from .choices import *
 
 
 class Persona(models.Model):
-    nombre = models.CharField(max_length=100)
-    apellido_paterno = models.CharField(max_length=100)
-    apellido_materno = models.CharField(max_length=100)
-    rut = models.CharField(max_length=12, unique=True)
-    fecha_nacimiento = models.DateField()
+    nombre = models.CharField(max_length=100, null=True, blank=True)
+    apellido_paterno = models.CharField(max_length=100, null=True, blank=True)
+    apellido_materno = models.CharField(max_length=100, null=True, blank=True)
+    rut = models.CharField(max_length=12, unique=True, null=True, blank=True)
+    fecha_nacimiento = models.DateField(null=True, blank=True)
     direccion = models.CharField(max_length=200, null=True, blank=True)
     telefono = models.CharField(max_length=20, null=True, blank=True)
     correo = models.EmailField(max_length=45, null=True, blank=True)
@@ -58,7 +58,9 @@ class Docente(models.Model):
     tramo_cpeip = models.CharField(
         max_length=50, choices=TRAMO_CPEIP_CHOICES, null=True, blank=True
     )
-
+    jubilado = models.BooleanField(default=False, blank=True, null=True)
+    bienios_cumplidos = models.IntegerField(null=True, blank=True)
+    renuncia_presentada = models.BooleanField(default=False, blank=True, null=True)
     def __str__(self):
         return f"{self.persona.nombre} {self.persona.apellido_paterno} {self.persona.apellido_materno}"
 

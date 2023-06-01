@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FaBuilding, FaChalkboardTeacher, FaUserTie, FaCity, FaSun, FaMoon } from 'react-icons/fa'; 
-import { Footer } from './Footer';
+import { Footer } from './layouts/Footer';
 import useDarkMode from '../hooks/useDarkMode';
 import logo from '../images/logo-color-galvarino.png'; 
 
@@ -11,8 +11,8 @@ export function HomeList() {
         <div className={`flex flex-col items-center justify-center min-h-screen font-body space-y-6 ${darkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-700'}`}>
           {/* <button onClick={toggleDarkMode} className="absolute top-0 right-0 m-4 p-2 rounded-full focus:outline-none">
                 {darkMode ? <FaSun /> : <FaMoon />}
-            </button> */}
-            <div className="w-32 h-32 rounded-full flex items-center justify-center mb-2 overflow-hidden relative">
+            </button>  */}
+            <div className="h-32 w-32 rounded-full flex items-center justify-center mb-2 overflow-hidden relative">
                 <img src={logo} alt="Logo Municipalidad de Galvarino" className="object-cover w-full h-full" />
             </div>
             <h1 className="text-4xl font-bold">Bienvenido a DAEM</h1>

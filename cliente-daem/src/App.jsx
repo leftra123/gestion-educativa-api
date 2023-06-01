@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { EstablecimientoPage } from './pages/EstablecimientoPage';
-import { EstablecimientoFormPage } from './pages/EstablecimientoFormPage';
-import { DocentePage } from './pages/DocentePage';
-import { DocenteFormPage } from './pages/DocenteFormPage';
-import { Navigation } from './components/Navigation';
+import { EstablecimientoPage } from './pages/establecimiento/EstablecimientoPage';
+import { EstablecimientoFormPage } from './pages/establecimiento/EstablecimientoFormPage';
+import { DocentePage } from './pages/docente/DocentePage';
+import { DocenteFormPage } from './pages/docente/DocenteFormPage';
+import { Navigation } from './components/layouts/Navigation';
 import { Toaster } from 'react-hot-toast';
 import { HomePage } from './pages/HomePage';
 
