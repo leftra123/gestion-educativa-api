@@ -51,19 +51,19 @@ git clone https://github.com/leftra123/gestion-educativa-api.git
 
 Asegúrese de tener instalado Python y Pip. Recomendamos usar un entorno virtual para manejar las dependencias, puedes usar venv u otra herramienta que prefieras. En la raíz del proyecto, ejecutar
 
-\```bash
+```
 python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
-\```
+```
 
 **Para el cliente (React)**:
 
 Asegúrese de tener instalado Node.js y npm. Luego en la carpeta del cliente, ejecutar:
 
-\```bash
+```
 npm install
-\```
+```
 
 
 ## Uso
@@ -72,23 +72,23 @@ npm install
 
 Desde la raíz del proyecto, ejecutar:
 
-\```bash
+```
 python manage.py runserver
-\```
+```
 # o en Mac
-\```bash
+```bash
 python3 manage.py runserver
-\```
+```
 
 **Para el cliente (React)**:
 
 Desde la carpeta del cliente(cliente-daem), ejecutar:
 
-\```bash
+```
 cd cliente-daem
 npm start
 npm run dev
-\```
+```
 
 ## Contacto
 
