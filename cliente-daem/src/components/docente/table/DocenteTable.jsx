@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Popover } from "@headlessui/react";
-
-
+import { TableEntrySelector } from "../../shared/TableEntrySelector";//creo que debería agregar un tableEntrySelector en una carpeta aparte ya que se repite en varios componentes
+import { TableFooter } from "../../shared/TableFooter";
+import { SortButton } from "../../button/SortButton";
 export function DocenteTable({ docentes, onDocenteClick }) {
     const handleLinkClick = (e) => {
         e.stopPropagation();
@@ -11,14 +12,16 @@ export function DocenteTable({ docentes, onDocenteClick }) {
         <div className="overflow-x-auto">
             <div className="min-w-screen  bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
                 <div className="w-full lg:w-5/6">
-                    <div className="bg-white shadow-md rounded my-6">
+                    <TableEntrySelector />
+                    <div className="overflow-x-auto bg-white shadow-md rounded-lg my-6">
                         <table className="min-w-max w-full table-auto">
                             <thead>
                                 <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                    <th className="py-3 px-6 text-left">establecimiento</th>
                                     <th className="py-3 px-6 text-left">Rol</th>
                                     <th className="py-3 px-6 text-left">Nombres</th>
-                                    <th className="py-3 px-6 text-left">Hora subvencion</th>
-                                    <th className="py-3 px-6 text-left">Hora contrato</th>
+                                    {/* <th className="py-3 px-6 text-left">Hora subvencion</th> */}
+                                    {/* <th className="py-3 px-6 text-left">Hora contrato</th> */}
                                     <th className="py-3 px-6 text-left">Rut</th>
                                     <th className="py-3 px-6 text-left">Email</th>
                                     <th className="py-3 px-6 text-left">opciones</th>
@@ -30,6 +33,16 @@ export function DocenteTable({ docentes, onDocenteClick }) {
                                         key={docente.id}
                                         onClick={() => onDocenteClick(docente.id)}
                                     >
+                                        <td className="py-3 px-6 text-left whitespace-nowrap">
+                                            <div className="flex items-center">
+                                                <span className="font-medium">{docente.establecimientos[0].nombre}</span>
+                                            </div>
+                                        </td>
+                                        <td className="py-3 px-6 text-left">
+                                            <div className="flex items-center">
+                                                <span className="font-medium">{docente.rol}</span>
+                                            </div>
+                                        </td>
                                         <td className="py-3 px-6 text-left">
                                             <div className="flex items-center capitalize">
                                                 <span className="font-medium mr-1">{`${docente.persona.nombre} ${docente.persona.apellido_paterno} ${docente.persona.apellido_materno}`}</span>
@@ -37,14 +50,14 @@ export function DocenteTable({ docentes, onDocenteClick }) {
                                         </td>
                                         {/* <td className="py-3 px-6 text-left">
                                             <div className="flex items-center">
-                                                <span>{docente.persona.apellido_paterno}</span>
-                                            </div>
-                                        </td>
-                                        <td className="py-3 px-6 text-left">
-                                            <div className="flex items-center">
-                                                <span>{docente.persona.apellido_materno}</span>
+                                                <span>{docente.hora_contrato}</span>
                                             </div>
                                         </td> */}
+                                        {/* <td className="py-3 px-6 text-left">
+                                            <div className="flex items-center">
+                                                <span>{docente.hora_subvencion}</span>
+                                            </div>
+                                        </td>  */}
                                         <td className="py-3 px-6 text-left">
                                             <div className="flex items-center">
                                                 <span>{docente.persona.rut}</span>
@@ -113,20 +126,7 @@ export function DocenteTable({ docentes, onDocenteClick }) {
                                 ))}
                             </tbody>
                         </table>
-                        <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
-                            <span className="text-xs xs:text-sm text-gray-900">
-                                Mostrando 1 de 50 Entradas
-
-                            </span>
-                            <div className="inline-flex mt-2 xs:mt-0">
-                                <button className="text-sm mr-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l">
-                                    Anterior
-                                </button>
-                                <button className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
-                                    Siguiente
-                                </button>
-                            </div>
-                        </div>
+                        <TableFooter />
                     </div>
                 </div>
             </div>

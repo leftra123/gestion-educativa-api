@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllDocentes } from "../../api/docente.api";
-import { DocenteCard } from "./DocenteCard";
+import { DocenteCard } from "../docente/DocenteCard";
 import { DocenteCardGrid } from "./DocenteCardGrid";
-import { DocenteTable } from "./DocenteTable";
+import { DocenteTable } from "../docente/table/DocenteTable";
 import { SortButton } from "../button/SortButton";
 import { CrearDocenteButton } from "../button/CrearDocente";
 import { SearchInput } from "../input/SearchInput";

@@ -5,8 +5,8 @@ import infoCircleIcon from '../../../images/svg/infoCircleIcon.svg';
 import plusCircleIcon from '../../../images/svg/plusCircleIcon.svg';
 import { ThreeDotsVerticalActionEstablecimiento } from '../../popover/establecimiento/ThreeDotsTableEstablecimiento.jsx';
 import { InfoOpen } from '../../popover/InfoOpen';
-import { TableEntrySelector } from './TableEntrySelector';
-import { TableFooter } from './TableFooter';
+import { TableEntrySelector } from '../../shared/TableEntrySelector';
+import { TableFooter } from '../../shared/TableFooter';
 import { SortButton } from '../../button/SortButton';
 
 export function EstablecimientoTable({ establecimientos, onEstablecimientoClick }) {
@@ -85,25 +85,25 @@ export function EstablecimientoTable({ establecimientos, onEstablecimientoClick 
                                     </th>
                                     <th className="py-3 px-6 text-left relative">
                                         <span>Nombre</span>
-                                        <div className="absolute right-1 top-3">
+                                        <div className="absolute right-1 top-4">
                                             <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('nombre')} />
                                         </div>
                                     </th>
                                     <th className="py-3 px-6 text-left relative">
                                         <span>Encargado</span>
-                                        <div className="absolute right-1 top-3">
+                                        <div className="absolute right-1 top-4">
                                             <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('encargado')} />
                                         </div>
                                     </th>
                                     <th className="py-3 px-6 text-left relative">
                                         <span>RBD</span>
-                                        <div className="absolute right-1 top-3">
+                                        <div className="absolute right-1 top-4">
                                             <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('rbd')} />
                                         </div>
                                     </th>
                                     <th className="py-3 px-6 text-left relative">
                                         <span>DV</span>
-                                        <div className="absolute right-1 top-3">
+                                        <div className="absolute right-1 top-4">
                                             <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('dv')} />
                                         </div>
                                     </th>
@@ -149,9 +149,13 @@ export function EstablecimientoTable({ establecimientos, onEstablecimientoClick 
                                             <td className="py-3 px-6 text-left leading-relaxed">
 
                                                 <div className="flex items-center">
+                                                    {/* <Link
+                                                        className="hover:underline hover:text-blue-500 mr-2 transition duration-200 ease-in-out"
+                                                        to="/docente/{docente.establecimientos[0].nombre}}"
+                                                        onClick={handleLinkClick}> */}
                                                     <Link
                                                         className="hover:underline hover:text-blue-500 mr-2 transition duration-200 ease-in-out"
-                                                        to="/docente"
+                                                        to={`/docente/${establecimiento.id}`}
                                                         onClick={handleLinkClick}>
                                                         Ver docentes
                                                     </Link>
