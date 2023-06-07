@@ -159,7 +159,7 @@ export function EstablecimientoTable({ establecimientos, onEstablecimientoClick 
                                                         onClick={handleLinkClick}>
                                                         Ver docentes
                                                     </Link>
-                                                    {/* este botoncito está para el futuro borrarlo papish */}
+                                                    {/* este botoncito está para avisar de que se esta desarrollando */}
                                                     <InfoOpen />
                                                 </div>
                                             </td>
@@ -171,7 +171,7 @@ export function EstablecimientoTable({ establecimientos, onEstablecimientoClick 
                                         </tr>
                                         {expandedRowId === establecimiento.id && (
                                             <tr className="border-b border-gray-200 bg-gray-100">
-                                                <td colSpan={7} className='text-center'>
+                                                <td colSpan={entries} className='text-center'>
                                                     No hay información extra sobre {establecimiento.nombre}.
                                                 </td>
                                             </tr>

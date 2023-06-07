@@ -11,9 +11,9 @@ export function EstablecimientoCard({ establecimiento }) {
     className=' bg-indigo-600 p-4 mt-2 hover:bg-indigo-700 cursor-pointer transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 rounded-lg shadow-lg'
     onClick={() => { navigate(`/establecimiento/${establecimiento.id}`); }}
 >
-    <h2 className="font-bold text-xl text-white text-center mb-2">{establecimiento.nombre}</h2>
+    <h2 className="text-2xl text-indigo-200 text-center"><span className="text-white">{establecimiento.rbd}</span> - <span className="text-white">{establecimiento.dv}</span></h2>
     <p className="text-sm text-indigo-200 text-center mb-1">Encargado: <span className="text-white capitalize">{encargadoFullName ? encargadoFullName : 'no asignado'}</span></p>
-    <p className="text-sm text-indigo-200 text-center">RBD: <span className="text-white">{establecimiento.rbd}</span> - <span className="text-white">{establecimiento.dv}</span></p>
+    <h3 className="font-bold text-white text-center mb-2">{establecimiento.nombre}</h3>
 </div>
   )
 }

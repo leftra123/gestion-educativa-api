@@ -4,6 +4,7 @@ import { createEstablecimientos, deleteEstablecimiento, updateEstablecimiento, g
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { getAllEstablecimientos } from '../../api/establecimiento.api';
+import { getAllDocentes } from '../../api/docente.api';
 
 export function EstablecimientoFormPage() {
 
@@ -12,6 +13,24 @@ export function EstablecimientoFormPage() {
     const navigate = useNavigate();
     const [establecimientos, setEstablecimientos] = useState([]);
     const params = useParams();
+    const [docentes, setDocentes] = useState([]);
+    const [selectedDocente, setSelectedDocente] = useState(null);
+
+    useEffect(() => {
+        getAllDocentes().then((response) => {
+            setDocentes(response.data);
+        });
+    }, []);
+    const handleSelect = (event) => {
+        const docenteId = event.target.value;
+        const docente = docentes.find((doc) => doc.id === docenteId);
+        setSelectedDocente(docente);
+
+        // Aquí es donde actualizarías el establecimiento con el docente seleccionado
+        updateEstablecimiento(establecimientoId, { encargado: docenteId }).then((response) => {
+            // Actualizar el estado del establecimiento o hacer algo más con la respuesta
+        });
+    };
 
     const onSubmit = handleSubmit(async (data) => {
         try {
@@ -28,7 +47,7 @@ export function EstablecimientoFormPage() {
                     correo: data['encargado.correo']
                 }
             };
-    
+
             if (params.id) {
                 await updateEstablecimiento(params.id, requestData)
                 toast.success('Establecimiento actualizado correctamente', {
@@ -48,16 +67,16 @@ export function EstablecimientoFormPage() {
             })
         }
     });
-    
-    
+
+
     useEffect(() => {
         async function loadEstablecimientos() {
-          const { data } = await getAllEstablecimientos(); 
-          setEstablecimientos(data);
+            const { data } = await getAllEstablecimientos();
+            setEstablecimientos(data);
         }
-    
+
         loadEstablecimientos();
-      }, []);
+    }, []);
 
     useEffect(() => {
         async function loadEstablecimiento() {
@@ -83,22 +102,22 @@ export function EstablecimientoFormPage() {
     return (
         <div className="max-w-md mx-auto mt-2 mb-3 shadow-md p-7 rounded-lg bg-white">
             <button
-  onClick={() => navigate('/establecimiento')}
-  className="flex items-center justify-center border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-400 hover:bg-indigo-700 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150 px-1 py-1 shadow-md"
->
-  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
-    <path
-      fillRule="evenodd"
-      d="M9.707 4.293a1 1 0 010 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-      clipRule="evenodd"
-    ></path>
-  </svg>
-</button>
+                onClick={() => navigate('/establecimiento')}
+                className="flex items-center justify-center border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-400 hover:bg-indigo-700 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150 px-1 py-1 shadow-md"
+            >
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        fillRule="evenodd"
+                        d="M9.707 4.293a1 1 0 010 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                    ></path>
+                </svg>
+            </button>
 
 
 
-    <h1 className="text-center text-2xl font-bold mt-10 mb-5">Formulario Establecimiento</h1>
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <h1 className="text-center text-2xl font-bold mt-10 mb-5">Formulario Establecimiento</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
                     <label className='block mb-1 font-bold text-gray-500'>Nombre del Colegio</label>
                     <input
@@ -111,7 +130,7 @@ export function EstablecimientoFormPage() {
                     {errors.nombre && <span className="text-red-500">{errors.nombre.message}</span>}
                 </div>
                 <div>
-                <label className='block mb-1 font-bold text-gray-500'>RBD</label>
+                    <label className='block mb-1 font-bold text-gray-500'>RBD</label>
                     <input
                         type="text"
                         placeholder="RBD"
@@ -122,7 +141,7 @@ export function EstablecimientoFormPage() {
                     {errors.rbd && <span className="text-red-500">{errors.rbd.message}</span>}
                 </div>
                 <div>
-                <label className='block mb-1 font-bold text-gray-500'>Dígito verificador</label>
+                    <label className='block mb-1 font-bold text-gray-500'>Dígito verificador</label>
                     <input
                         type="text"
                         placeholder="DV"
@@ -133,11 +152,33 @@ export function EstablecimientoFormPage() {
                 </div>
                 <div className="text-center text-2xl font-bold mb-5">Datos del Encargado</div>
                 <div>
-                <label className='block mb-1 font-bold text-gray-500'>
-                Actualmente no tiene un encargado/a asignado/a.
-                </label>
+                    <label className='block mb-1 font-bold text-gray-500'>
+                        Actualmente no tiene un encargado/a asignado/a.
+                    </label>
                 </div>
-               
+                <div>
+                    <label className='block mb-1 font-bold text-gray-500'>Encargado</label>
+                    {/* <select
+                        {...register("encargado")}
+                        
+                    >
+                        {establecimientos.map((encargado) => (
+                            <option key={encargado.id} value={encargado.id}>
+                                {encargado.nombre} {encargado.apellido_paterno} {encargado.apellido_materno}
+                            </option>
+                        ))}
+                    </select> */}
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400" value={selectedDocente} onChange={handleSelect}>
+                        {docentes.map((docente) => (
+                            <option key={docente.id} value={docente.id}>
+                                {docente.persona.nombre} {docente.persona.apellido_paterno} {docente.persona.apellido_materno}
+                            </option>
+                        ))}
+                    </select>
+
+                </div>
+
+
                 <button type="submit" className="px-5 py-2 bg-blue-500 text-white rounded transition duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105">Guardar</button>
                 {params.id &&
                     <button
