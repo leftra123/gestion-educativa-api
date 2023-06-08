@@ -1,30 +1,118 @@
+import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Popover } from "@headlessui/react";
-import { TableEntrySelector } from "../../shared/TableEntrySelector";//creo que debería agregar un tableEntrySelector en una carpeta aparte ya que se repite en varios componentes
+import { TableEntrySelector } from "../../shared/TableEntrySelector";
 import { TableFooter } from "../../shared/TableFooter";
 import { SortButton } from "../../button/SortButton";
+import { TrashIcon } from '../../../images/svg/TrashIcon'
+import { TrheeDotsVertical } from "../../../images/svg/ThreeDotsVertical";
+import { EditIcon } from "../../../images/svg/EditIcon";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+
 export function DocenteTable({ docentes, onDocenteClick }) {
+    const [entries, setEntries] = useState(Number(localStorage.getItem('entries')) || 10);
+    const [page, setPage] = useState(1);
+    const [sortField, setSortField] = useState(null);
+    const [sortOrder, setSortOrder] = useState('asc');
+    const [displayedDocentes, setDisplayedDocentes] = useState([...docentes].slice((page - 1) * entries, page * entries));
+
+    useEffect(() => {
+        const displayedList = [...docentes].slice((page - 1) * entries, page * entries);
+
+        displayedList.sort((a, b) => {
+            if (sortField) {
+                if (sortOrder === 'asc') {
+                    return a[sortField] > b[sortField] ? 1 : -1;
+                } else {
+                    return a[sortField] < b[sortField] ? 1 : -1;
+                }
+            }
+            return 0;
+        });
+
+        setDisplayedDocentes(displayedList);
+    }, [sortField, sortOrder, docentes, page, entries]);
+
+    const handleSortChange = (field) => {
+        if (field === sortField) {
+            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+        } else {
+            setSortField(field);
+            setSortOrder('asc');
+        }
+    }
+
     const handleLinkClick = (e) => {
         e.stopPropagation();
     };
     
+    const handleEntriesChange = (e) => {
+        const newEntries = Number(e.target.value);
+        setEntries(newEntries);
+        localStorage.setItem('entries', newEntries);
+    }
+
+    const handlePageChange = (direction) => {
+        if (direction === 'next' && page * entries < docentes.length) {
+            setPage(page + 1);
+        } else if (direction === 'prev' && page > 1) {
+            setPage(page - 1);
+        }
+    }
+
     return (
         <div className="overflow-x-auto">
             <div className="min-w-screen  bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
                 <div className="w-full lg:w-5/6">
-                    <TableEntrySelector />
+                    <TableEntrySelector entries={entries} onEntriesChange={handleEntriesChange} />
                     <div className="overflow-x-auto bg-white shadow-md rounded-lg my-6">
                         <table className="min-w-max w-full table-auto">
                             <thead>
                                 <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                    <th className="py-3 px-6 text-left">establecimiento</th>
-                                    <th className="py-3 px-6 text-left">Rol</th>
-                                    <th className="py-3 px-6 text-left">Nombres</th>
-                                    {/* <th className="py-3 px-6 text-left">Hora subvencion</th> */}
-                                    {/* <th className="py-3 px-6 text-left">Hora contrato</th> */}
-                                    <th className="py-3 px-6 text-left">Rut</th>
-                                    <th className="py-3 px-6 text-left">Email</th>
-                                    <th className="py-3 px-6 text-left">opciones</th>
+                                    <th className="py-3 px-6 text-left relative">
+                                        <span>Establecimiento</span>
+                                            <Tippy content="Ordenar por establecimiento">
+                                        <div className="absolute right-1 top-4">
+                                            <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('establecimiento')} />
+                                        </div>
+                                            </Tippy>
+                                    </th>
+                                    <th className="py-3 px-6 text-left relative">
+                                        <span>Rol</span>
+                                    <Tippy content="Ordenar por rol">
+                                        <div className="absolute right-1 top-4">
+                                            <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('rol')} />
+                                        </div>
+                                    </Tippy>
+                                    </th>
+                                    <th className="py-3 px-6 text-left relative">
+                                        <span>Nombres</span>
+                                    <Tippy content="Ordenar por nombres">
+                                        <div className="absolute right-1 top-4">
+                                            <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('nombres')} />
+                                        </div>
+                                    </Tippy>
+                                    </th>
+                                    <th className="py-3 px-6 text-left relative">
+                                        <span>Rut</span>
+                                    <Tippy content="Ordenar por rut">
+                                        <div className="absolute right-1 top-4">
+                                            <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('rut')} />
+                                        </div>
+                                    </Tippy>
+                                    </th>
+                                    <th className="py-3 px-6 text-left relative">
+                                        <span>Email</span>
+                                    <Tippy content="Ordenar por email">
+                                        <div className="absolute right-1 top-4">
+                                            <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('email')} />
+                                        </div>
+                                    </Tippy>
+                                    </th>
+                                    <Tippy content="Seleccionar acción">
+                                    <th className="py-3 px-6 text-left">Acciones</th>
+                                    </Tippy>
                                 </tr>
                             </thead>
                             <tbody className="text-gray-600 text-sm font-light">
@@ -48,16 +136,6 @@ export function DocenteTable({ docentes, onDocenteClick }) {
                                                 <span className="font-medium mr-1">{`${docente.persona.nombre} ${docente.persona.apellido_paterno} ${docente.persona.apellido_materno}`}</span>
                                             </div>
                                         </td>
-                                        {/* <td className="py-3 px-6 text-left">
-                                            <div className="flex items-center">
-                                                <span>{docente.hora_contrato}</span>
-                                            </div>
-                                        </td> */}
-                                        {/* <td className="py-3 px-6 text-left">
-                                            <div className="flex items-center">
-                                                <span>{docente.hora_subvencion}</span>
-                                            </div>
-                                        </td>  */}
                                         <td className="py-3 px-6 text-left">
                                             <div className="flex items-center">
                                                 <span>{docente.persona.rut}</span>
@@ -83,32 +161,24 @@ export function DocenteTable({ docentes, onDocenteClick }) {
                                                                     transition ease-in-out duration-150
                                                                 `}
                                                             >
-                                                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path fillRule="evenodd" d="M10 12a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                                                                    <path fillRule="evenodd" d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm8-6a6 6 0 100 12 6 6 0 000-12z" clipRule="evenodd" />
-                                                                </svg>
+                                                                <Tippy content="Seleccionar acción">
+                                                                    <span><TrheeDotsVertical /></span>
+                                                                </Tippy>
                                                             </Popover.Button>
                                                             <Popover.Panel className="absolute z-10 w-48 max-w-sm px-4 mt-3 transform -translate-x-1/2 left-1/2 sm:px-0 lg:max-w-3xl">
                                                                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                                                                     <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                                                                        <Link to={`/docente-editar/${docente.id}`} className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
-                                                                            <svg className="flex-shrink-0 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                                            </svg>
+                                                                        <Link to={`/docente/${docente.id}`} className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
+                                                                            <EditIcon />
                                                                             <div className="ml-4">
                                                                                 <p className="text-base leading-6 font-medium text-gray-900">
                                                                                     Editar
                                                                                 </p>
                                                                             </div>
                                                                         </Link>
-                                                                        <Link to={`/docente-eliminar/${docente.id}`} className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
-                                                                            <svg className="flex-shrink-0 h-6 w-6 text-red-600" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
+                                                                        <Link to={`/docente/${docente.id}`} className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
+                                                                            <TrashIcon />
                                                                             <div className="ml-4">
-
                                                                                 <p className="text-base leading-6 font-medium text-gray-900">
                                                                                     Eliminar
                                                                                 </p>

@@ -1,13 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import React from 'react';
+import { Popover } from "@headlessui/react";
 import infoCircleIcon from '../../../images/svg/infoCircleIcon.svg';
 import plusCircleIcon from '../../../images/svg/plusCircleIcon.svg';
-import { ThreeDotsVerticalActionEstablecimiento } from '../../popover/establecimiento/ThreeDotsTableEstablecimiento.jsx';
+import { TrheeDotsVertical } from "../../../images/svg/ThreeDotsVertical";
 import { InfoOpen } from '../../popover/InfoOpen';
 import { TableEntrySelector } from '../../shared/TableEntrySelector';
 import { TableFooter } from '../../shared/TableFooter';
 import { SortButton } from '../../button/SortButton';
+import { EditIcon } from "../../../images/svg/EditIcon";
+import {TrashIcon} from '../../../images/svg/TrashIcon'
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 export function EstablecimientoTable({ establecimientos, onEstablecimientoClick }) {
     const [expandedRowId, setExpandedRowId] = useState(null);
@@ -33,7 +38,6 @@ export function EstablecimientoTable({ establecimientos, onEstablecimientoClick 
 
         setDisplayedEstablecimientos(displayedList);
     }, [sortField, sortOrder, establecimientos, page, entries]);
-
 
     const handleSortChange = (field) => {
         if (field === sortField) {
@@ -85,31 +89,47 @@ export function EstablecimientoTable({ establecimientos, onEstablecimientoClick 
                                     </th>
                                     <th className="py-3 px-6 text-left relative">
                                         <span>Nombre</span>
+                                        <Tippy content="Ordenar por nombre">
                                         <div className="absolute right-1 top-4">
                                             <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('nombre')} />
                                         </div>
+                                        </Tippy>
                                     </th>
                                     <th className="py-3 px-6 text-left relative">
                                         <span>Encargado</span>
+                                        <Tippy content="Ordenar por encargado">
                                         <div className="absolute right-1 top-4">
                                             <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('encargado')} />
                                         </div>
+                                        </Tippy>
                                     </th>
                                     <th className="py-3 px-6 text-left relative">
                                         <span>RBD</span>
+                                        <Tippy content="Ordenar por RBD">
                                         <div className="absolute right-1 top-4">
                                             <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('rbd')} />
                                         </div>
+                                        </Tippy>
                                     </th>
                                     <th className="py-3 px-6 text-left relative">
                                         <span>DV</span>
+                                        <Tippy content="Ordenar por DV">
                                         <div className="absolute right-1 top-4">
                                             <SortButton sortOrder={sortOrder} onSort={() => handleSortChange('dv')} />
                                         </div>
+                                        </Tippy>
                                     </th>
 
-                                    <th className="py-3 px-6 text-left">opciones</th>
-                                    <th className="py-3 px-6 text-left">acciones</th>
+                                    <th className="py-3 px-6 text-left">
+                                        <Tippy content="Selecciona opción">
+                                        <span>opciones</span>
+                                        </Tippy>
+                                        </th>
+                                    <th className="py-3 px-6 text-left">
+                                        <Tippy content="Selecciona acción">
+                                        <span>acciones</span>
+                                        </Tippy>
+                                        </th>
                                 </tr>
                             </thead>
                             <tbody className="text-gray-600 text-sm font-light">
@@ -164,9 +184,50 @@ export function EstablecimientoTable({ establecimientos, onEstablecimientoClick 
                                                 </div>
                                             </td>
                                             <td className="py-3 px-6 text-left leading-relaxed">
-
-                                                <ThreeDotsVerticalActionEstablecimiento className="text-gray-800 hover:text-gray-600 transition-colors duration-200 ease-in-out" />
-
+                                                        <div className="flex items-center">
+                                                        <Popover className="relative">
+                                                    {({ open }) => (
+                                                        <>
+                                                            <Popover.Button
+                                                                className={`
+                                                                    ${open ? '' : 'text-opacity-80'}    
+                                                                    text-gray-500
+                                                                    hover:text-opacity-100
+                                                                    focus:outline-none
+                                                                    focus:text-opacity-100
+                                                                    transition ease-in-out duration-150
+                                                                `}
+                                                            >
+                                                                <Tippy content="Seleccionar acción">
+                                                                    <span><TrheeDotsVertical /></span>
+                                                                </Tippy>
+                                                            </Popover.Button>
+                                                            <Popover.Panel className="absolute z-10 w-48 max-w-sm px-4 mt-3 transform -translate-x-1/2 left-1/2 sm:px-0 lg:max-w-3xl">
+                                                                <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                                                                    <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                                                                        <Link to={`/establecimiento/${establecimiento.id}`} className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
+                                                                            <EditIcon />
+                                                                            <div className="ml-4">
+                                                                                <p className="text-base leading-6 font-medium text-gray-900">
+                                                                                    Editar
+                                                                                </p>
+                                                                            </div>
+                                                                        </Link>
+                                                                        <Link to={`/establecimiento/${establecimiento.id}`} className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
+                                                                            <TrashIcon />
+                                                                            <div className="ml-4">
+                                                                                <p className="text-base leading-6 font-medium text-gray-900">
+                                                                                    Eliminar
+                                                                                </p>
+                                                                            </div>
+                                                                        </Link>
+                                                                    </div>
+                                                                </div>
+                                                            </Popover.Panel>
+                                                        </>
+                                                    )}
+                                                </Popover>
+                                                        </div>
                                             </td>
                                         </tr>
                                         {expandedRowId === establecimiento.id && (
