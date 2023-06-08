@@ -14,7 +14,8 @@ export function EstablecimientoFormPage() {
     const [establecimientos, setEstablecimientos] = useState([]);
     const params = useParams();
     const [docentes, setDocentes] = useState([]);
-    const [selectedDocente, setSelectedDocente] = useState(null);
+    const [selectedDocente, setSelectedDocente] = useState();
+    
 
     useEffect(() => {
         getAllDocentes().then((response) => {
@@ -23,14 +24,20 @@ export function EstablecimientoFormPage() {
     }, []);
     const handleSelect = (event) => {
         const docenteId = event.target.value;
+        if (docenteId === '') {
+          setSelectedDocente('');
+          return;
+        }
+        
         const docente = docentes.find((doc) => doc.id === docenteId);
         setSelectedDocente(docente);
-
+      
         // Aquí es donde actualizarías el establecimiento con el docente seleccionado
         updateEstablecimiento(establecimientoId, { encargado: docenteId }).then((response) => {
-            // Actualizar el estado del establecimiento o hacer algo más con la respuesta
+          // Actualizar el estado del establecimiento o hacer algo más con la respuesta
         });
-    };
+      };
+      
 
     const onSubmit = handleSubmit(async (data) => {
         try {
@@ -70,13 +77,11 @@ export function EstablecimientoFormPage() {
 
 
     useEffect(() => {
-        async function loadEstablecimientos() {
-            const { data } = await getAllEstablecimientos();
-            setEstablecimientos(data);
-        }
-
-        loadEstablecimientos();
-    }, []);
+        getAllDocentes({ colegioId: params.id }).then((response) => {
+            setDocentes(response.data);
+        });
+    }, [params.id]);
+    
 
     useEffect(() => {
         async function loadEstablecimiento() {
@@ -156,27 +161,37 @@ export function EstablecimientoFormPage() {
                         Actualmente no tiene un encargado/a asignado/a.
                     </label>
                 </div>
-                <div>
-                    <label className='block mb-1 font-bold text-gray-500'>Encargado</label>
-                    {/* <select
-                        {...register("encargado")}
-                        
+                <div className="mb-4">
+                    <label
+                        htmlFor="encargado-select"
+                        className='block mb-1 font-bold text-gray-500'
                     >
-                        {establecimientos.map((encargado) => (
-                            <option key={encargado.id} value={encargado.id}>
-                                {encargado.nombre} {encargado.apellido_paterno} {encargado.apellido_materno}
+                        Encargado
+                    </label>
+                    <select
+                        id="encargado-select"
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                        value={selectedDocente}
+                        onChange={handleSelect}
+                    >
+                        {!selectedDocente && (
+                            <option  value="">
+                                Selecciona al encargado
                             </option>
-                        ))}
-                    </select> */}
-                    <select className="w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400" value={selectedDocente} onChange={handleSelect}>
+                        )}
                         {docentes.map((docente) => (
                             <option key={docente.id} value={docente.id}>
                                 {docente.persona.nombre} {docente.persona.apellido_paterno} {docente.persona.apellido_materno}
                             </option>
                         ))}
                     </select>
+                    
 
                 </div>
+
+
+
+
 
 
                 <button type="submit" className="px-5 py-2 bg-blue-500 text-white rounded transition duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105">Guardar</button>

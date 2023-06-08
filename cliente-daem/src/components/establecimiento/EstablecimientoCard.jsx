@@ -12,8 +12,8 @@ export function EstablecimientoCard({ establecimiento }) {
     onClick={() => { navigate(`/establecimiento/${establecimiento.id}`); }}
 >
     <h2 className="text-2xl text-indigo-200 text-center"><span className="text-white">{establecimiento.rbd}</span> - <span className="text-white">{establecimiento.dv}</span></h2>
-    <p className="text-sm text-indigo-200 text-center mb-1">Encargado: <span className="text-white capitalize">{encargadoFullName ? encargadoFullName : 'no asignado'}</span></p>
     <h3 className="font-bold text-white text-center mb-2">{establecimiento.nombre}</h3>
+    <p className="text-sm text-indigo-200 text-center mb-1">Encargado: <span className="text-white capitalize">{encargadoFullName ? encargadoFullName : 'no asignado'}</span></p>
 </div>
   )
 }
