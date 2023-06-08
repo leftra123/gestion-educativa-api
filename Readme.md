@@ -92,8 +92,8 @@ npm run dev
 
 ## Contacto
 
-Si tienes alguna duda o sugerencia puedes contactarme, [presiona aquí.](https://github.com/leftra123/).
+Si tienes alguna duda o sugerencia puedes contactarme, [presiona aquí](https://github.com/leftra123/).
 
 
 ## Reconocimientos
-Este README fue creado con la ayuda de [OpenAI's ChatGPT](https://chat.openai.com/)
+Este README fue creado con la ayuda de [OpenAI's ChatGPT](https://chat.openai.com/).
