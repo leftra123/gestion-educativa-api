@@ -75,7 +75,7 @@ Desde la raíz del proyecto, ejecutar:
 ```
 python manage.py runserver
 ```
-## o en Mac
+** o en Mac
 ```bash
 python3 manage.py runserver
 ```
@@ -96,4 +96,4 @@ Si tienes alguna duda o sugerencia puedes contactarme, [presiona aquí.](https:/
 
 
 ## Reconocimientos
-Este README fue creado con la ayuda de [OpenAI's ChatGPT](https://chat.openai.com/).
+Este README fue creado con la ayuda de [OpenAI's ChatGPT](https://chat.openai.com/)
