@@ -6,7 +6,7 @@
   <img src="https://seekicon.com/free-icon-download/github-badge_1.svg" width="20" />
 </p> 
 
-Este proyecto es un sistema de gestión educativa API utilizando Django en el servidor y React en el cliente. La API se encarga de gestionar los valores de establecimientos, docentes, asistentes y DAEM. La interfaz del cliente se ha desarrollado en React con un diseño atractivo mediante TailwindCSS.
+Este proyecto consiste en un sistema de gestión educativa implementado como una API. Utiliza Django en el lado del servidor para manejar las operaciones de back-end, incluyendo la gestión de los datos de establecimientos, docentes, asistentes y DAEM. En el lado del cliente, se utiliza React para crear una interfaz de usuario atractiva y funcional. El diseño de la interfaz se ha realizado utilizando TailwindCSS, lo que proporciona un aspecto moderno y atractivo.
 
 <p>
   <img src="https://icon-library.com/images/django-icon/django-icon-0.jpg" width="100" />
