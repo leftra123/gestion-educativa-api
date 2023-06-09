@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavLink, useMatch } from 'react-router-dom';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import logo from '../../images/logo-color-galvarino.png';
+import Tippy from '@tippyjs/react';
 
 export function Navigation() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -29,7 +30,9 @@ export function Navigation() {
         <nav className={`shadow-md dark:bg-gray-800  text-gray-900 dark:text-white p-5 transition-colors duration-300`}>
             <div className="flex justify-between items-center">
                 <NavLink to="/" className="text-3xl font-bold hover:text-gray-500 dark:hover:text-gray-400 transition-transform duration-200 ease-in-out transform hover:scale-105">
+                    <Tippy content="Volver al inicio" placement="right">
                     <img src={logo} alt="Logo" className="h-12 w-12 transform transition-transform duration-200 hover:scale-110" />
+                    </Tippy>
                 </NavLink>
                 <div className={`${menuOpen ? 'flex' : 'hidden'} mt-4 lg:flex lg:items-center lg:mt-0 space-x-4 transition-height duration-300 ease-in-out`}>
                     {["establecimiento", "docente", "asistentes", "DAEM"].map(path => {

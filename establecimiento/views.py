@@ -21,7 +21,14 @@ class AsistenteEducacionView(viewsets.ModelViewSet):
 
 class DocenteView(viewsets.ModelViewSet):
     serializer_class = DocenteSerializer
-    queryset = Docente.objects.all()
+
+    def get_queryset(self):
+        queryset = Docente.objects.all()
+        establecimiento_id = self.request.query_params.get('establecimiento', None)
+        if establecimiento_id is not None:
+            queryset = queryset.filter(establecimientos__id=establecimiento_id)
+        return queryset
+
 
 
 class EstablecimientoView(viewsets.ModelViewSet):

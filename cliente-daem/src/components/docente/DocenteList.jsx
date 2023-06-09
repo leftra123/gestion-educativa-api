@@ -8,8 +8,12 @@ import { SortButton } from "../button/SortButton";
 import { CrearDocenteButton } from "../button/CrearDocente";
 import { SearchInput } from "../input/SearchInput";
 import { ViewToggleButton } from "../toggle/ViewToggleButton";
+import { useLocation } from 'react-router-dom';
 
 export function DocenteList() {
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const establecimientoId = query.get("establecimiento");
     const navigate = useNavigate();
     const [docentes, setDocentes] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -28,11 +32,12 @@ export function DocenteList() {
     useEffect(() => {
         localStorage.setItem("view", view);
         async function loadDocentes() {
-            const res = await getAllDocentes();
+            const res = await getAllDocentes(establecimientoId);
             setDocentes(res.data);
         }
         loadDocentes();
-    }, [view]);
+    }, [view, establecimientoId]);
+
 
     const sortDocentes = () => {
         let sortedDocentes;
@@ -64,15 +69,15 @@ export function DocenteList() {
                 <CrearDocenteButton />
                 <SearchInput />
             </div>
-            <ViewToggleButton view={view} changeView={changeView}/>
+            <ViewToggleButton view={view} changeView={changeView} />
             {view === "card" ? (
                 <DocenteCardGrid docentes={filteredDocentes}
-                onDocenteClick={redirectToDocente} />
+                    onDocenteClick={redirectToDocente} />
             ) : (
                 <DocenteTable docentes={filteredDocentes}
-                onDocenteClick={redirectToDocente} />
+                    onDocenteClick={redirectToDocente} />
             )}
 
-            </div>
+        </div>
     );
 }
